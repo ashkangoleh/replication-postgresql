@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  master:
+    # image: timescale/timescaledb:latest-pg13
+    image: postgres:13
+    container_name: my_postgres_database
+    restart: always
+    volumes:
+        - ./data:/var/lib/postgresql/data
+        - ./archives:/archives
+    ports:
+      - "5435:5432"
+    environment:
+      - 'POSTGRES_USER=root'
+      - 'POSTGRES_PASSWORD=1'
+      - 'POSTGRES_DB=my_db'
+      # - 'TS_TUNE_MAX_BG_WORKERS=16'
+      # - 'TS_TUNE_MAX_CONNS=200'
+      # - 'TS_TUNE_NUM_CPUS=4'
+      # - 'TS_TUNE_MEMORY=4GB'
+
+
+
+networks:
+  default:
+    external:
+      name: ms

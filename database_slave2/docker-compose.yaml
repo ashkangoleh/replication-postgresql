@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  slave:
+    image: postgres:13
+    container_name: my_postgres_database_slave2
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./tmp/data:/tmp/data
+    ports:
+      - "7432:5432"
+    environment:
+      - 'POSTGRES_USER=root'
+      - 'POSTGRES_PASSWORD=1'
+      - 'POSTGRES_DB=my_db'
+
+    
+
+networks:
+  default:
+    external:
+      name: ms
+
+# pg_basebackup -h 192.168.240.2 -U replicator -p 5432 -D /tmp/data/ -Fp -Xs -P -R
+# pg_basebackup --pgdata /var/lib/postgresql/data --format=p  --write-recovery-conf --checkpoint=fast --label=mffb --progress --host=master --port=5432 --username=replicator

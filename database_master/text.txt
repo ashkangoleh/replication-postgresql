@@ -1,0 +1,2 @@
+echo "primary_conninfo = 'user=replicator password=secret host=192.168.240.2 port=5432'">> $PGDATA/postgresql.auto.conf && 
+echo "listen_addresses = '*'" >> $PGDATA/postgresql.auto.conf
